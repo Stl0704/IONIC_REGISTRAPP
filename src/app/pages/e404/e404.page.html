@@ -1,0 +1,16 @@
+<ion-header [translucent]="true">
+  <ion-toolbar class=" degradado">
+    <ion-title>Pagina No Encontrada</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="fondo">
+  <ion-card class="fondo">
+    <ion-card-header>
+      <ion-img src="assets/e404.svg"></ion-img>
+      <ion-card-title> <h1> UPS! Hay un Error! :c </h1> </ion-card-title>
+    </ion-card-header>
+    <ion-card-content> <h1>La Pagina que has ingresado no existe. Intenta otra opcion... </h1></ion-card-content>
+    <ion-button expand="block" (click)="volver()" class="degradado"> Volver Al Login </ion-button>
+  </ion-card>
+</ion-content>

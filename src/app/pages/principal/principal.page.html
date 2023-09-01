@@ -1,0 +1,15 @@
+<ion-header [translucent]="true">
+  <ion-toolbar class="degradado">
+    <ion-buttons slot="end">
+      <ion-back-button ></ion-back-button>
+      <ion-button (click)="fav()">
+        <ion-icon slot="icon-only" name="heart" [color]="color" defaultHref="/"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title> Bienvenido: {{ usuario }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="fondo">
+
+</ion-content>

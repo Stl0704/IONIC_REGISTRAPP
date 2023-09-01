@@ -1,13 +1,37 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>inicio</ion-title>
+  <ion-toolbar class="degradado">
+    <ion-title class="title">inicio</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">inicio</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="fondo">
+  <div class="center">
+
+    <ion-card class="fondo">
+      
+      <ion-img src="assets/inicio.svg" ></ion-img>
+      <ion-item class="fondo input ion-margin-top" lines="none">
+        <ion-input label="Usuario" labelPlacement="floating" [(ngModel)]="mdl_input_u"></ion-input>
+      </ion-item>
+
+      <ion-item class="fondo input ion-margin-top" lines="none">
+        <ion-input type="password" label="Contrasenia" labelPlacement="floating" [(ngModel)]="mdl_input_c"></ion-input>
+      </ion-item>
+
+      <ion-button class="degradado ion-margin-top boton" (click)="navegar()" expand="block">Iniciar Sesion</ion-button>
+      <ion-button class="degradado" expand="block">Registrate</ion-button>
+
+    </ion-card>
+
+
+
+  </div>
+
+  <ion-alert 
+  [isOpen]="isAlertOpen" 
+  header="ATENCION" 
+  [message]="mensaje" 
+  [buttons]="alertButtons"
+  (didDismiss)="setOpen(false)">
+  </ion-alert>
 </ion-content>
