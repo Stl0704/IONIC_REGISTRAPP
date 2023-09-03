@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
   selector: 'app-registro',
@@ -7,9 +8,59 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegistroPage implements OnInit {
 
-  constructor() { }
+  mdl_usuario: string = '';
+  mdl_contrasena: string = '';
+  mdl_confirm_contrasena: string = '';
+
+  mdl_input_u: string = '';
+  mdl_input_c: string = '';
+
+   
+
+
+  mesaje: string = '';
+ isAlertOpen = false;
+  public alertButtons = ['OK']; 
+
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
 
+
+  registro() {
+
+    if(this.mdl_usuario == '' && this.mdl_contrasena == ''){
+
+      this.mesaje= 'Debe ingresar los datos para poder registrarse';
+      this.isAlertOpen = true;
+
+  }
+   else {
+    if (this.mdl_usuario == this.mdl_input_u && this.mdl_contrasena == this.mdl_input_c) {
+      //parametros para navegacion
+      let parametros: NavigationExtras = {
+        state:{
+          user: this.mdl_usuario,
+          pass: this.mdl_contrasena
+        }
+      }
+      this.router.navigate(['inicio'],parametros);
+    } else {
+      this.mesaje = 'Credenciales Invalidas.';
+      this.isAlertOpen = true;
+    }
+
+  }
+
+
+
+
+
+
+  }
+
+  setOpen(isOpen: boolean) {
+    this.isAlertOpen = isOpen;
+  }
 }
