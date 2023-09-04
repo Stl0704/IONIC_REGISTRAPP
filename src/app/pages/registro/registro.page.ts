@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
@@ -6,62 +6,61 @@ import { NavigationExtras, Router } from '@angular/router';
   templateUrl: './registro.page.html',
   styleUrls: ['./registro.page.scss'],
 })
-export class RegistroPage implements OnInit {
+export class RegistroPage {
+  mdl_usuario: string = ''; // Vacío para que el usuario lo ingrese
+  mdl_contrasena: string = ''; // Vacío para que el usuario lo ingrese
+  mdl_confirm_contrasena: string = '';
+  mdl_input_u: string = ''; // Campo de entrada del usuario
+  mdl_input_c: string = ''; // Campo de entrada de la contraseña
 
-  mdl_usuario: string = 'maxi';
-  mdl_contrasena: string = '1234';
-  mdl_confirm_contrasena: string = '123';
-  mdl_confirm_token: string = '12345';
-
-
-  mdl_input_u: string = '';
-  mdl_input_c: string = '';
-  mdl_input_cc: string = '';
-  
-
-
-
-  mesaje: string = '';
+  mensaje: string = '';
   isAlertOpen = false;
   public alertButtons = ['OK'];
 
-  constructor(private router: Router) { }
+  usuariosRegistrados: { username: string; password: string }[] = [];
 
-  ngOnInit() {
-  }
-
+  constructor(private router: Router) {}
 
   registro() {
-
-    if (this.mdl_usuario == '' && this.mdl_contrasena == '') {
-
-      this.mesaje = 'Debe ingresar los datos para poder registrarse';
+    if (this.mdl_usuario === '' || this.mdl_contrasena === '') {
+      this.mensaje = 'Debe ingresar los datos para poder registrarse.';
       this.isAlertOpen = true;
-
-    } if (this.mdl_contrasena  !== this.mdl_confirm_contrasena ) {
-
-      this.mesaje = 'Las contrasenas no coinciden';
+    } else if (this.mdl_contrasena !== this.mdl_confirm_contrasena) {
+      this.mensaje = 'Las contraseñas no coinciden.';
       this.isAlertOpen = true;
-    } else { if (this.mdl_usuario == this.mdl_input_u && this.mdl_contrasena == this.mdl_input_c) {
-      //parametros para navegacion
-      let parametros: NavigationExtras = {
-        state:{
-          user: this.mdl_usuario,
-          pass: this.mdl_contrasena
-        }
-      }
-      this.router.navigate(['inicio'],parametros);
     } else {
-      this.mesaje = 'Credenciales Invalidas.';
-      this.isAlertOpen = true;
+      // Verificar si el usuario ya está registrado
+      const usuarioExistente = this.usuariosRegistrados.find(
+        (usuario) => usuario.username === this.mdl_usuario
+      );
+
+      if (usuarioExistente) {
+        this.mensaje = 'El usuario ya existe. Por favor, inicie sesión.';
+        this.isAlertOpen = true;
+      } else {
+        // Registrar al usuario
+        this.usuariosRegistrados.push({
+          username: this.mdl_usuario,
+          password: this.mdl_contrasena,
+        });
+
+        // Convertir el arreglo de usuarios en una cadena JSON
+        const usuariosJSON = JSON.stringify(this.usuariosRegistrados);
+
+        // Guardar la cadena JSON en un archivo JSON localmente (en el navegador)
+        const blob = new Blob([usuariosJSON], { type: 'application/json' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'usuarios.json';
+        a.click();
+        window.URL.revokeObjectURL(url);
+
+        // Redirigir al usuario a la página de inicio de sesión
+        this.mensaje = 'Usuario registrado correctamente. Puede iniciar sesión.';
+        this.isAlertOpen = true;
+      }
     }
-
-
-  }
-
-
-
-
   }
 
   setOpen(isOpen: boolean) {

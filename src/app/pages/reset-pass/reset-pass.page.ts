@@ -7,15 +7,20 @@ import { Component, OnInit } from '@angular/core';
 })
 
 
-
-mesaje: string = '';
-isAlertOpen = false;
-public alertButtons = ['OK'];
 export class ResetPassPage implements OnInit {
+
+  isAlertOpen = false;
+  public alertButtons = ['OK']; 
+  mensaje: string = '';
 
   constructor() { }
 
   ngOnInit() {
+
+  }
+
+  setOpen(isOpen: boolean) {
+    this.isAlertOpen = isOpen;
   }
 
 }

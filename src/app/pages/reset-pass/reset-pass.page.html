@@ -23,8 +23,12 @@
 
 
 
-    <ion-alert [isOpen]="isAlertOpen" header="ATENCION" [message]="mesaje" [buttons]="alertButtons"
-      (didDismiss)="setOpen(false)">
+    <ion-alert 
+    [isOpen]="isAlertOpen" 
+    header="ATENCION" 
+    [message]="mensaje" 
+    [buttons]="alertButtons"
+    (didDismiss)="setOpen(false)">
     </ion-alert>
   </div>
 </ion-content>

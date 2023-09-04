@@ -14,14 +14,14 @@
 
 
     <ion-item class="fondo input ion-margin-top" lines="none">
-      <ion-input label="Usuario" labelPlacement="floating" [(ngModel)]="mdl_input_u"></ion-input>
+      <ion-input label="Usuario" labelPlacement="floating" [(ngModel)]="mdl_usuario"></ion-input>
     </ion-item>
 
     <ion-item class="fondo input ion-margin-top" lines="none">
-      <ion-input type="password" label="Contrasenia" labelPlacement="floating" [(ngModel)]="mdl_input_c"></ion-input>
+      <ion-input type="password" label="Contrasenia" labelPlacement="floating" [(ngModel)]="mdl_contrasena"></ion-input>
     </ion-item>
   <ion-item  class="fondo input ion-margin-top" lines="none">
-    <ion-input   type="password" label="Confirmar contrasenia" labelPlacement="floating"  [(ngModel)]="mdl_input_cc"></ion-input>
+    <ion-input   type="password" label="Confirmar contrasenia" labelPlacement="floating"  [(ngModel)]="mdl_confirm_contrasena"></ion-input>
   </ion-item>
 
     <ion-button class="degradado" (click)="registro()" expand="block" >Registrar</ion-button>
@@ -38,7 +38,7 @@
 <ion-alert 
 [isOpen]="isAlertOpen" 
 header="ATENCION" 
-[message]="mesaje" 
+[message]="mensaje" 
 [buttons]="alertButtons"
 (didDismiss)="setOpen(false)">
 </ion-alert>
