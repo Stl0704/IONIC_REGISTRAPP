@@ -11,6 +11,8 @@ export class RegistroPage implements OnInit {
   mdl_usuario: string = 'maxi';
   mdl_contrasena: string = '1234';
   mdl_confirm_contrasena: string = '123';
+  mdl_confirm_token: string = '12345';
+
 
   mdl_input_u: string = '';
   mdl_input_c: string = '';
@@ -48,7 +50,7 @@ export class RegistroPage implements OnInit {
           pass: this.mdl_contrasena
         }
       }
-      this.router.navigate(['principal'],parametros);
+      this.router.navigate(['inicio'],parametros);
     } else {
       this.mesaje = 'Credenciales Invalidas.';
       this.isAlertOpen = true;

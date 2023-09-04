@@ -5,6 +5,12 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './reset-pass.page.html',
   styleUrls: ['./reset-pass.page.scss'],
 })
+
+
+
+mesaje: string = '';
+isAlertOpen = false;
+public alertButtons = ['OK'];
 export class ResetPassPage implements OnInit {
 
   constructor() { }
