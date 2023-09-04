@@ -8,19 +8,20 @@ import { NavigationExtras, Router } from '@angular/router';
 })
 export class RegistroPage implements OnInit {
 
-  mdl_usuario: string = '';
-  mdl_contrasena: string = '';
-  mdl_confirm_contrasena: string = '';
+  mdl_usuario: string = 'maxi';
+  mdl_contrasena: string = '1234';
+  mdl_confirm_contrasena: string = '123';
 
   mdl_input_u: string = '';
   mdl_input_c: string = '';
+  mdl_input_cc: string = '';
+  
 
-   
 
 
   mesaje: string = '';
- isAlertOpen = false;
-  public alertButtons = ['OK']; 
+  isAlertOpen = false;
+  public alertButtons = ['OK'];
 
   constructor(private router: Router) { }
 
@@ -30,14 +31,16 @@ export class RegistroPage implements OnInit {
 
   registro() {
 
-    if(this.mdl_usuario == '' && this.mdl_contrasena == ''){
+    if (this.mdl_usuario == '' && this.mdl_contrasena == '') {
 
-      this.mesaje= 'Debe ingresar los datos para poder registrarse';
+      this.mesaje = 'Debe ingresar los datos para poder registrarse';
       this.isAlertOpen = true;
 
-  }
-   else {
-    if (this.mdl_usuario == this.mdl_input_u && this.mdl_contrasena == this.mdl_input_c) {
+    } if (this.mdl_contrasena  !== this.mdl_confirm_contrasena ) {
+
+      this.mesaje = 'Las contrasenas no coinciden';
+      this.isAlertOpen = true;
+    } else { if (this.mdl_usuario == this.mdl_input_u && this.mdl_contrasena == this.mdl_input_c) {
       //parametros para navegacion
       let parametros: NavigationExtras = {
         state:{
@@ -45,15 +48,14 @@ export class RegistroPage implements OnInit {
           pass: this.mdl_contrasena
         }
       }
-      this.router.navigate(['inicio'],parametros);
+      this.router.navigate(['principal'],parametros);
     } else {
       this.mesaje = 'Credenciales Invalidas.';
       this.isAlertOpen = true;
     }
 
+
   }
-
-
 
 
 
