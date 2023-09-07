@@ -12,9 +12,12 @@
       <ion-img src="assets/forgot.svg"></ion-img>
 
       <ion-item class="fondo input ion-margin-top" lines="none">
-        <ion-input label="Ingrese el usuario" labelPlacement="floating"></ion-input>
+        <ion-input label="email" labelPlacement="floating" [(ngModel)]="nombre"></ion-input>
       </ion-item>
-      <ion-button class="degradado" style="margin-top: 30px" expand="block">Aceptar</ion-button>
+      <ion-item class="fondo input ion-margin-top" lines="none"> 
+        <ion-input type="password" label="Nueva Contrasenia" labelPlacement="floating"  [(ngModel)]="contrasena"> </ion-input>
+      </ion-item>
+      <ion-button class="degradado" style="margin-top: 30px" (click)="actualizar()" expand="block">Aceptar</ion-button>
     </ion-card>
 
 
