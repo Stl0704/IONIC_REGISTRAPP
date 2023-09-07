@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar class="degradado">
-    <ion-title class="title">inicio</ion-title>
+    <ion-title class="title">DUOC UC</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -8,18 +8,25 @@
   <div class="center">
 
     <ion-card class="fondo">
-      
-      <ion-img src="assets/inicio.svg" ></ion-img>
+      <ion-card-header>
+        <ion-card-title class="title"> INICIO SESION</ion-card-title>
+      </ion-card-header>
+
+      <ion-img src="assets/inicio.svg"></ion-img>
       <ion-item class="fondo input ion-margin-top" lines="none">
-        <ion-input label="Usuario" labelPlacement="floating" [(ngModel)]="mdl_input_u"></ion-input>
+        <ion-input label="Usuario" labelPlacement="floating" [(ngModel)]="mdl_usuario_c"></ion-input>
       </ion-item>
 
       <ion-item class="fondo input ion-margin-top" lines="none">
-        <ion-input type="password" label="Contrasenia" labelPlacement="floating" [(ngModel)]="mdl_input_c"></ion-input>
+        <ion-input type="password" label="Contrasenia" labelPlacement="floating" [(ngModel)]="mdl_contrasena"></ion-input>
       </ion-item>
 
       <ion-button class="degradado ion-margin-top boton" (click)="navegar()" expand="block">Iniciar Sesion</ion-button>
-      <ion-button class="degradado" expand="block">Registrate</ion-button>
+
+      <ion-button class="degradado  ion-margin-top boton" (click)="Registro()" expand="block">Registrate</ion-button>
+
+      <ion-button (click)="ResetPass()" class="degradado ion-margin-top boton" expand="block"> Recuperar contraseña
+      </ion-button>
 
     </ion-card>
 
@@ -27,11 +34,7 @@
 
   </div>
 
-  <ion-alert 
-  [isOpen]="isAlertOpen" 
-  header="ATENCION" 
-  [message]="mensaje" 
-  [buttons]="alertButtons"
-  (didDismiss)="setOpen(false)">
+  <ion-alert [isOpen]="isAlertOpen" header="ATENCION" [message]="mensaje" [buttons]="alertButtons"
+    (didDismiss)="setOpen(false)">
   </ion-alert>
 </ion-content>

@@ -7,62 +7,63 @@ import { NavigationExtras, Router } from '@angular/router';
   styleUrls: ['./registro.page.scss'],
 })
 export class RegistroPage {
-  mdl_usuario: string = ''; // Vacío para que el usuario lo ingrese
-  mdl_contrasena: string = ''; // Vacío para que el usuario lo ingrese
+
+  //MODELO PARA REGISTRAR A USUARIO
+
+  mdl_usuario_nombre: string = '';
+  mdl_usuario_c: string = '';
+  mdl_contrasena: string = '';
   mdl_confirm_contrasena: string = '';
-  mdl_input_u: string = ''; // Campo de entrada del usuario
-  mdl_input_c: string = ''; // Campo de entrada de la contraseña
+
+
+// OBJETO USUARIO:
+
+  usuario = {
+    correo_usuario: '',
+    contrasena_usuario: '',
+  };
+
+// ALERT 
 
   mensaje: string = '';
   isAlertOpen = false;
   public alertButtons = ['OK'];
 
-  usuariosRegistrados: { username: string; password: string }[] = [];
 
-  constructor(private router: Router) {}
 
-  registro() {
-    if (this.mdl_usuario === '' || this.mdl_contrasena === '') {
-      this.mensaje = 'Debe ingresar los datos para poder registrarse.';
-      this.isAlertOpen = true;
-    } else if (this.mdl_contrasena !== this.mdl_confirm_contrasena) {
-      this.mensaje = 'Las contraseñas no coinciden.';
-      this.isAlertOpen = true;
-    } else {
-      // Verificar si el usuario ya está registrado
-      const usuarioExistente = this.usuariosRegistrados.find(
-        (usuario) => usuario.username === this.mdl_usuario
-      );
+  constructor(private router: Router) { }
 
-      if (usuarioExistente) {
-        this.mensaje = 'El usuario ya existe. Por favor, inicie sesión.';
-        this.isAlertOpen = true;
-      } else {
-        // Registrar al usuario
-        this.usuariosRegistrados.push({
-          username: this.mdl_usuario,
-          password: this.mdl_contrasena,
-        });
-
-        // Convertir el arreglo de usuarios en una cadena JSON
-        const usuariosJSON = JSON.stringify(this.usuariosRegistrados);
-
-        // Guardar la cadena JSON en un archivo JSON localmente (en el navegador)
-        const blob = new Blob([usuariosJSON], { type: 'application/json' });
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'usuarios.json';
-        a.click();
-        window.URL.revokeObjectURL(url);
-
-        // Redirigir al usuario a la página de inicio de sesión
-        this.mensaje = 'Usuario registrado correctamente. Puede iniciar sesión.';
-        this.isAlertOpen = true;
-      }
-    }
+  ngOnInit() {
   }
 
+  registro() {
+
+
+    if(this.mdl_usuario_nombre == '' && this.mdl_usuario_c== '' && this.mdl_contrasena == '' && this.mdl_confirm_contrasena == ''){
+      this.mensaje = 'Debe ingresar valores';
+      this.isAlertOpen = true;
+    } else {
+
+      localStorage.setItem('usuario', JSON.stringify(this.usuario));
+
+      this.usuario.contrasena_usuario = this.mdl_contrasena;
+      this.usuario.correo_usuario = this.mdl_usuario_c;
+
+      // ALMACENA LOS DATOS USUARIO EN LOCAL STORAGE
+      localStorage.setItem('usuario.contrasena_usuario', JSON.stringify(this.usuario.contrasena_usuario));
+      localStorage.setItem('usuario.correo_usuario', JSON.stringify(this.usuario.correo_usuario));
+
+      // OBTIENE EL LOCALSTORAGE PARA QUE ESTOS PARAMETROS VIAJEN AL LOGIN
+      localStorage.getItem('usuario.contrasena_usuario');
+      localStorage.getItem('usuario.correo_usuario');
+
+      this.router.navigate(['inicio']).then(() => {
+        location.reload();
+      });
+
+    }
+  }
+// OPEN ALERT
   setOpen(isOpen: boolean) {
     this.isAlertOpen = isOpen;
   }
